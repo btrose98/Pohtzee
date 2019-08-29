@@ -145,7 +145,6 @@ class Scorer(object):
         values = self.cardValues()
         return values[4]
 
-#PROBLEM WITH NOT WANTING TO GET RID OF ANY CARDS
 def play():
   print()
   print("You start with $100 and each hand costs $5 to play.")
@@ -157,13 +156,13 @@ def play():
   #Cost per hand
   handCost = 5
 
- #DOES NOT EXIT THIS LOOP AT ANY POINT
   end = False
   while not end:
     dollars -= handCost
     print("You have " + str(dollars) + " dollars" )
     print()
-    #Hand Loop
+    
+    #Create deck
     deck = Deck() #new deck will be created and shuffled after
     deck.shuffle()
     
@@ -182,14 +181,14 @@ def play():
       print("Which card positions do you want to get rid of? (ie: 1, 2, 3)")
       print("*Just hit return to hold all.")
       inputString = input()
+      if inputString=="":
+          validInput=True
+          break
       try:   
         inputList = [int(inp.strip()) for inp in inputString.split(",")]
 
         for inp in inputList:
           if inp > 6:
-            continue
-        #PROBLEM IF THEY WANT TO KEEP ALL CARDS
-          if inp < 1:
             continue
 
         for inp in inputList: #replacing cards that were discarded
@@ -264,5 +263,14 @@ def play():
 
     print()
     print()
+
+    if dollars >= 250:
+        print("Good job! You were able to make money.")
+        end =True
+        break
+    elif dollars <= 0:
+        print("Unfortunately you've lost all your money, you need more practice to learn the poker hands.")
+        end =True
+        break
 
 play()
