@@ -65,7 +65,6 @@ class Player(object):
     def __repr__(self):
         print(self.cards)
 
-#PROBLEM WITH FULL HOUSE
 class Scorer(object):
     def __init__(self, cards):
         self.cards = cards
@@ -105,10 +104,10 @@ class Scorer(object):
             return True
         return False
     
-    #PROBLEM HERE, logic of pair doesn't make sense
     def fullHouse(self):
         values = self.cardValues()
-        if self.threeOfAKind() and (values[0]==values[1] or values[3]==values[4]):
+        if (values[0]==values[1]==values[2] and values[3]==values[4] or
+            values[2]==values[3]==values[4] and values[0]==values[1]):
             return True
         return False
 
@@ -158,7 +157,7 @@ def play():
   #Cost per hand
   handCost = 5
 
-#DOES NOT EXIT THIS LOOP AT ANY POINT
+ #DOES NOT EXIT THIS LOOP AT ANY POINT
   end = False
   while not end:
     dollars -= handCost
@@ -211,8 +210,8 @@ def play():
     #Royal Flush
     if score.royalFlush():
       print("Royal Flush!!!")
-      print("+ $2000")
-      dollars += 2000
+      print("+ $500")
+      dollars += 500
     #Straight flush
     elif score.straightFlush():
       print("Straight Flush!")
@@ -221,13 +220,13 @@ def play():
     #4 of a kind
     elif score.fourOfAKind():
       print("Four of a kind!")
-      print("+ $125")
-      dollars += 125
+      print("+ $100")
+      dollars += 100
     #Full house
     elif score.fullHouse():
       print("Full House!")
-      print("+ $40")
-      dollars += 40 
+      print("+ $50")
+      dollars += 50 
     #Flush
     elif score.flush():
       print("Flush!")
